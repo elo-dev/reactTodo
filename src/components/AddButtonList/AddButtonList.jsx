@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { List } from '../List/List'
 import './AddButtonList.scss'
 import { Badge } from '../Badge/Badge'
+import axios from 'axios'
 
 export const AddButtonList = ({ colors, onAddList }) => {
   const [visiblePopup, setVisiblePopup] = useState(false)
-  const [selectedColor, setSelectedColor] = useState(colors[0].id)
+  const [selectedColor, setSelectedColor] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
   const [inputValue, setInputValue] = useState('')
+
+  useEffect(()=> {
+    if(Array.isArray(colors)){
+      setSelectedColor(colors[0].id)
+    }
+  }, [colors])
 
   const resetPopup = () => {
     setInputValue('')
@@ -20,8 +28,15 @@ export const AddButtonList = ({ colors, onAddList }) => {
       alert('Введите название списка')
       return
     }
-    onAddList({id: Math.random(), name: inputValue, color: colors.filter(c => c.id === selectedColor)[0].name})
-    resetPopup()
+    setIsLoading(true)
+    axios.post('http://localhost:3001/lists', {name: inputValue, colorId: selectedColor}).then(({data}) => {
+      const color = colors.filter(c => c.id === selectedColor)[0].name
+      const listObj = {...data, color: {name: color}}
+      onAddList(listObj)
+      resetPopup()
+    }).finally(() => {
+      setIsLoading(false)
+    })
   }
 
   return (
@@ -58,7 +73,9 @@ export const AddButtonList = ({ colors, onAddList }) => {
               />
             ))}
           </div>
-          <button onClick={addList} className={'button'}>Добавить</button>
+          <button onClick={addList} className={'button'}>
+            {isLoading ? 'Добавление' : 'Добавить'}
+          </button>
         </div>
       )}
     </div>

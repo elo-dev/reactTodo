@@ -14,12 +14,13 @@ body {
 }
 
 .todo {
+  display: flex;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 750px;
-  height: 530px;
+  min-height: 530px;
   box-shadow: 1px 2px 20px #f3f3f3;
   border-radius: 10px;
   font-size: 14px;
