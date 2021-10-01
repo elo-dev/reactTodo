@@ -18,9 +18,30 @@ const App = () => {
 
   const [lists, setLists] = useState(null)
   const [colors, setColors] = useState(null)
+  const [activeItem, setActiveItem] = useState(null)
 
   const onAddList = (obj) => {
     const newList = [...lists, obj]
+    setLists(newList)
+  }
+
+  const onAddTask = (listId, taskObj) => {
+    const newTasks = lists.map(item => {
+      if(item.id === listId){
+        item.tasks = [...item.tasks, taskObj]
+      }
+      return item
+    })
+    setLists(newTasks)
+  }
+
+  const onEditListTitle = (id,title) => {
+    const newList = lists.map(item => {
+      if(item.id === id){
+        item.name = title
+      }
+      return item
+    })
     setLists(newList)
   }
 
@@ -30,15 +51,17 @@ const App = () => {
         <List
           items={[
             {
+              active: true,
               icon: <FontAwesomeIcon icon={('fas', 'list-ul')} size="1x" />,
               name: 'Все задачи',
-              active: true,
             },
           ]}
         />
         {lists ? (
           <List
             isRemovable
+            onClickItem={(item) => setActiveItem(item)}
+            activeItem={activeItem}
             onRemove={id => {
               const newList = lists.filter(item => item.id !== id)
               setLists(newList) 
@@ -50,7 +73,7 @@ const App = () => {
         )}
         <AddButtonList onAddList={onAddList} colors={colors} />
       </div>
-      {lists && <Tasks list={lists[1]} />}
+      {lists && activeItem && <Tasks onAddTask={onAddTask} list={activeItem} onEditTitle={onEditListTitle} />}
     </div>
   )
 }
