@@ -30,7 +30,7 @@
     {
       "id": 1,
       "listId": 2,
-      "text": "Изучить JavaScript",
+      "text": "Изучить JavaScript1",
       "completed": true
     },
     {
@@ -49,17 +49,11 @@
       "id": 4,
       "listId": 2,
       "text": "Redux (redux-observable, redux-saga)",
-      "completed": false
+      "completed": true
     },
     {
       "listId": 1,
       "text": "Тест1",
-      "completed": false,
-      "id": 5
-    },
-    {
-      "listId": 1,
-      "text": "Тест2",
       "completed": false,
       "id": 6
     },
@@ -77,21 +71,9 @@
     },
     {
       "listId": 1,
-      "text": "dsadsa",
-      "completed": false,
-      "id": 9
-    },
-    {
-      "listId": 1,
       "text": "sadasdda",
       "completed": false,
       "id": 10
-    },
-    {
-      "listId": 1,
-      "text": "sfsafasff",
-      "completed": false,
-      "id": 11
     },
     {
       "listId": 1,

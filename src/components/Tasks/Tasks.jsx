@@ -6,7 +6,7 @@ import { AddNewTasks } from './AddNewTasks'
 import { Link } from 'react-router-dom'
 import { Task } from './Task'
 
-export const Tasks = ({ list, onEditTitle, onAddTask, withoutEmpty }) => {
+export const Tasks = ({ list, onEditTitle, onAddTask, onRemoveTask, onEditTaskText, onCompleteTask, withoutEmpty }) => {
   const editTitle = () => {
     const newTitle = window.prompt('Название папки', list.name)
     if (newTitle) {
@@ -30,13 +30,13 @@ export const Tasks = ({ list, onEditTitle, onAddTask, withoutEmpty }) => {
         </h2>
       </Link>
 
-      {!withoutEmpty && !list.tasks.length && (
+      {!withoutEmpty && list.tasks && !list.tasks.length && (
         <h2 className="tasks__empty">Задачи отсутствуют</h2>
       )}
-      {list.tasks.map((task) => (
-        <Task task={task} />
+      {list.tasks && list.tasks.map((task) => (
+        <Task key={task.id} onComplete={onCompleteTask} onRemove={onRemoveTask} onEditText={onEditTaskText} list={list} {...task} />
       ))}
-      <AddNewTasks list={list} onAddTask={onAddTask} />
+      <AddNewTasks key={list.id} list={list} onAddTask={onAddTask} />
     </div>
   )
 }

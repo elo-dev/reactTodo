@@ -19,7 +19,7 @@ export const Sidebar = ({ lists, activeItem, setLists, colors }) => {
         onClickItem={(list) => history.push('/')}
         items={[
           {
-            active: true,
+            active: history.location.pathname === '/',
             icon: <FontAwesomeIcon icon={('fas', 'list-ul')} size="1x" />,
             name: 'Все задачи',
           },
