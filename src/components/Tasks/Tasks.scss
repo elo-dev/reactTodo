@@ -1,6 +1,7 @@
 .tasks {
-  flex: 1;
-  padding: 60px;
+  &:not(:last-of-type) {
+    margin-bottom: 30px;
+  }
   &__title {
     font-family: Montserrat;
     font-size: 32px;
@@ -115,6 +116,25 @@
         svg{
           opacity: 1;
           color: white;
+        }
+      }
+    }
+
+    &-edit{
+      margin: 0 10px;
+    }
+
+    &-edit,
+    &-delete{
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      cursor: pointer;
+      svg{
+        opacity: 0.4;
+
+        &:hover{
+          opacity: 0.9;
         }
       }
     }

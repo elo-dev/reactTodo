@@ -19,7 +19,7 @@ export const List = ({ items, onClick, isRemovable, onRemove, onClickItem, activ
     <ul onClick={onClick} className="menuList">
       {items.map((item, index) => (
         <li
-          onClick={onClickItem ? ()=>onClickItem(item) : null}
+          onClick={onClickItem ? () => onClickItem(item) : null}
           key={index}
           className={classNames(item.className, {
              active: item.active 
